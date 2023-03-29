@@ -1,0 +1,182 @@
+{% load static %}
+
+<head>
+    <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+  background-color: aliceblue;
+  
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header .header{
+  background-color: #fff;
+  height: 30px;
+}
+header a img{
+  width: 134px;
+margin-top: 4px;
+}
+.login-page {
+    margin-bottom: 60px;
+    height:0;
+  width: 660px;
+  padding: 8% 0 0;
+  margin-left: 800px;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background-color: #35328f;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.table-container{
+    margin-top:-55px;
+    margin-left:90px;
+   
+}
+.table-container table tr th{
+    padding: 10px;
+    text-align: center;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.table-container table tr td{
+    padding: 10px;
+    text-align: center;
+    color: #000000;
+    font-family: sans-serif;
+
+}
+.table-container table  td button{
+    background-color: #35328f; 
+    color: #f2f2f2;
+    padding: 6px;
+    padding-left: 9px;
+    border-radius: 6%;
+    font-family: sans-serif;
+}
+    </style>
+</head>
+
+<body>
+
+  <!-- add form -->
+        <div class="login-page">
+          <div class="form">
+            <div class="login">
+              <div class="login-header">
+                <h3>TODO LIST</h3>
+              </div>
+            </div>
+
+
+            <form class="login-form" action="{% url 'indexpage' %}" method="post">
+               {% csrf_token %} 
+              <input type="text" id="task" name="task" placeholder="A task for today" required/>
+              <input type="text" id="desc" name="desc" placeholder="Description" required/>
+              <input type="date" id="date" name="date" />
+              <button type="submit" value="post">Add</button>
+            </form>
+
+          </div>
+        </div> <!-- add form -->
+
+        <div class="table-container">
+            <table border="2px">
+                <tr>
+                    <th></th>
+                    <th>Task</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th></th>
+                    <th></th>
+                    
+                  </tr>
+
+                  {% for i in tak %}
+
+                  <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.desc}}</td>
+                    <td>{{i.date}}</td>
+                    <td> <a href="{% url 'edit' taskid=i.id %}"><button>Edit</button></a></td>
+                    <td> <a href="{% url 'delete' taskid=i.id %}"><button>Delete</button></a></td>
+                  </tr>
+
+                  {% endfor %}
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+</body>
